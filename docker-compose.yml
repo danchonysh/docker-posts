@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27071:27017
+    env_file:
+       - ./config/dev.env
+    volumes:
+      - posts-data:/data/db
+  api:
+    build: ./services/api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./services/api:/app
+      - /app/node_modules
+    env_file:
+       - ./config/dev.env
+    depends_on: [ mongo ]
+  ui:
+    build: ./services/ui
+    ports:
+      - 5000:8080
+    env_file:
+       - ./config/dev.env
+    volumes:
+      - ./services/ui/src:/api/src
+      - /app/node_modules
+volumes:
+  posts-data:
