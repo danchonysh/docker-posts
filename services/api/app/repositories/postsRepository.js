@@ -11,6 +11,7 @@ exports.getAll = async () => {
 }
 
 exports.createPost = async (data) => {
+	console.log(data)
 	const post = await new Posts(data).save()
 	return post
 }

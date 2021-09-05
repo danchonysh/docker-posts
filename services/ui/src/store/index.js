@@ -11,18 +11,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	actions: {
-		async request(ctx, {
-			url, 
-			success,
-			failure,
-			method,
-			data,
-			headers
-		}) {
-			const config = {
-				url,
-				method: method ?? 'GET'
-			}
+		async request(ctx, { url,  success, failure, method = 'GET', data, headers }) {
+			const config = { url, method }
 			if (data) {
 				config.headers = headers ?? { 'Content-Type': 'application/json'}
 				config.data = data
@@ -33,10 +23,5 @@ export default new Vuex.Store({
 				.catch(failure)
 		}
 	},
-	modules: {
-		posts, 
-		news,
-		pageState,
-		modal
-	}	
+	modules: { posts,  news, pageState, modal }
 })
