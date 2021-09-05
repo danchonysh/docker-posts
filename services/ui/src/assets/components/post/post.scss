@@ -1,0 +1,90 @@
+@import '../../scss/buttons.scss';
+@import '../../scss/edit-n-remove.scss';
+
+.post {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	border-radius: 5px;
+	background-color: whitesmoke;
+	background-size: cover;
+	background-position: center;
+	margin: 1rem auto;
+	box-shadow: 0 3px 5px 3px rgba(0,0,0,.3);
+	height: 300px;
+	transition: transform .4s;
+	@media (max-width: 450px) {
+		height: 200px;
+	}
+	overflow: hidden;
+	&__text {
+		text-align: center;
+		padding: .25rem .75rem;
+		width: 100%;
+		background-color: rgba(0,0,0,.6);
+		opacity: 0;
+		transition: opacity .2s;
+		color: white;
+		white-space: pre-wrap;
+		border-bottom: solid 1px lightgray;
+		&.input {
+			border: none;
+			outline: none;
+			font-size: 1rem;
+			font-family: inherit;
+			background-color: rgba(0,0,0,.6);
+			border-bottom: solid 1px tomato;
+		}
+	}
+	&__footer {
+		height: 30px;
+		opacity: 0;
+		transition: opacity .2s;
+		padding: .25rem .75rem;
+		background-color: rgba(0,0,0,.6);
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__time {
+		display: block;
+		width: 100%;
+		text-align: right;
+		color: white;
+		font-size: .8rem;
+		border: none;
+	}
+	&__options {
+		color: white;
+		line-height: 0;
+		transform: scale(1.2) translateY(-7px);
+		transition-property: color, transform, opacity;
+		transition-duration: .2s;
+		&:hover {
+			color: #fcc766;
+			cursor: pointer;
+		}
+		&:active {
+			color: tomato;
+		}
+	}	
+	&:hover &__footer, &:hover &__text {
+		opacity: 1;
+	}
+	&:hover &__delete:active {
+		transform: scale(.95);
+		color: rgba(255, 50, 50, 1);
+	}
+	&__photo {
+		filter: brightness(100%);
+		transition: filter .2s;
+	}
+	&:hover &__photo {
+		filter: brightness(75%)
+	}
+	&.moved {
+		transform: translateX(45%);
+	}
+}

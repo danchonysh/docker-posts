@@ -1,0 +1,18 @@
+.ok {
+	border: solid 1px rgb(23, 170, 3);
+	color: rgb(23, 170, 3);
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(23, 170, 3);
+		color: white;
+	}
+}
+.cancel {
+	border: solid 1px rgb(255, 95, 95);
+	color: rgb(255, 95, 95);
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(255, 95, 95);
+		color: white;
+	}
+}

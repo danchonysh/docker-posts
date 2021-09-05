@@ -1,0 +1,15 @@
+@import '../../scss/buttons.scss';
+
+.tab {
+	width: min(500px, 50%);
+	&__list {
+		height: 2rem;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		list-style-type: none;
+		&-item {
+			@include buttons(rgb(252, 199, 102), tomato);
+		}	
+	}
+}

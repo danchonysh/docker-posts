@@ -1,0 +1,41 @@
+@import '../../scss/buttons.scss';
+
+.buttons__list {
+	top: 50%;
+	z-index: 0;
+	transform: translate(0, calc(-50% + .5rem));
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+	width: auto;
+	transition-duration: .4s;
+	opacity: 1;
+	overflow: hidden;
+	&-item {
+		flex: 0 1 auto;
+		@include buttons(#eb3939, red);
+		&:first-child:hover {
+			background-color: rgb(68, 216, 68);
+			border-color: rgb(68, 216, 68);
+		}
+	}
+	@media(max-width: 500px) {
+		flex-direction: column;
+		border: solid 1px gray;
+		border-radius: 1rem;
+		margin-left: 5%;
+		&-item {
+			&:first-child, &:last-child {
+				border: none;
+				border-radius: 0;
+			}
+			&:last-child {
+				border-top: solid 1px gray;
+			}
+		}
+	}
+	&.hidden__list {
+		opacity: 0;
+	}
+}

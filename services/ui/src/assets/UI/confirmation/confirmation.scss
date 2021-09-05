@@ -1,0 +1,22 @@
+@import '../../scss/ok-n-cancel.scss'; 
+
+.confirm {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 60%;
+	min-width: 180px;
+	&__button {
+		width: 4rem;
+		font-size: .7rem;
+		text-align: center;
+		padding: .1rem .5rem;
+		border-radius: 50px;
+		background-color: inherit;
+		transition-property: background-color, color, transform;
+		transition-duration: .2s;
+		&:active {
+			transform: scale(.95);
+		}
+	}
+}

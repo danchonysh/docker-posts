@@ -1,0 +1,27 @@
+@import './btn.scss';
+
+@mixin buttons($hoverColor, $activeColor) {
+	@include btn;
+	border: solid 1px gray;
+	transition-property: color, background-color, border-color;
+	transition-duration: .2s;
+	&:hover {
+		cursor: pointer;
+		background: $hoverColor;
+		border-color: $hoverColor;
+		color: white;
+	}	
+	&.active {
+		color: white;
+		border-color: $activeColor;
+		background-color: $activeColor;
+	}	
+	&:first-child {
+		border-right: none;
+		border-radius: 2rem 0 0 2rem;
+	}
+	&:last-child {
+		border-left: none;
+		border-radius: 0 2rem 2rem 0;
+	}
+}

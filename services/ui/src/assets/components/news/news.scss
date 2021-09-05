@@ -1,0 +1,89 @@
+@import '../../scss/buttons.scss';
+@import '../../scss/edit-n-remove.scss';
+
+.article {
+	background-color: whitesmoke;
+	width: min(500px, 100%);
+	position: relative;
+	padding: 0 .75rem;
+	margin: 0 auto;
+	margin-top: 1rem;
+	border-radius: 5px;
+	box-shadow: 0 3px 5px 3px rgba(0,0,0,.3);
+	transition: transform .4s;
+	&__title {
+		width: 100%;
+		font-size: 1.25rem;
+		font-weight: 500;
+		padding: .5rem 0;
+		word-wrap: break-word;
+		&.input {
+			border: none;
+			outline: none;
+			background-color: inherit;
+		}
+	}
+	&__content {
+		padding: .5rem 0;
+		border-top: solid 1px lightgray;
+		border-bottom: solid 1px lightgray;
+		font-size: .75rem;
+		font-family: inherit;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		&.input {
+			border: none;
+			outline: none;
+			border-top: solid 1px tomato;
+			border-bottom: solid 1px tomato;
+			width: 100%;
+			min-height: 2.25rem;
+			background-color: inherit;
+			resize: vertical;
+			overflow: auto;
+		}
+	}
+	&__footer {
+		height: 30px;
+		padding: .5rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__time {
+		display: block;
+		width: 100%;
+		text-align: right;
+		color: gray;
+		font-size: .8rem;
+		border: none;
+	}
+	&__options {
+		line-height: 0;
+		transform: scale(1.2) translateY(-7px);
+		transition: color .2s, transform .2s;
+		&:hover {
+			color: #fcc766;
+			cursor: pointer;
+		}
+		&:active {
+			color: tomato;
+		}
+	}
+	&__confirm {
+		line-height: 0;
+		transform: scale(1);
+		transition: color .2s, transform .2s;
+		&:hover {
+			color: tomato;
+			cursor: pointer;
+		}
+		
+		&:active {
+			transform: scale(1);
+		}
+	}
+	&.moved {
+		transform: translateX(45%);
+	}
+}
