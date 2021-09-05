@@ -21,4 +21,6 @@ ui:
 	docker run -d --rm \
 	-p 5000:8080 \
 	--name posts-ui \
+	-v /home/daniel/Learning/docker-posts/services/ui/src:/app/src \
+	-v /app/node_modules \
 	posts-ui
