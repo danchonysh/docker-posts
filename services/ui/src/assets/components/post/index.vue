@@ -55,6 +55,7 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
+import { BASE_URL } from '../../../constants'
 
 export default {
 	components: {
@@ -131,7 +132,7 @@ export default {
 			const prev = this.preview
 			const image = prev
 				? `url(${prev})` 
-				: `url(${'http://localhost:3000/' + this.post.image})`
+				: `url(${BASE_URL + this.post.image})`
 			return { backgroundImage: image }
 		},
 		time() {

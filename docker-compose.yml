@@ -25,7 +25,7 @@ services:
     env_file:
        - ./config/dev.env
     volumes:
-      - ./services/ui/src:/api/src
+      - ./services/ui/src:/app/src
       - /app/node_modules
 volumes:
   posts-data:

@@ -82,7 +82,7 @@ export default {
 		await this.getPosts()
 		setInterval(() => {
 			this.updateTime(Date.now())
-		}, 60000)		
+		}, 5000)
 	}
 } 
 </script>

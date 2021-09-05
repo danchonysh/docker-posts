@@ -24,26 +24,16 @@ export default function formatting(time, current, lang = 'en') {
 	let minWord = 'minutes', hourWord = 'hours', dayWord = 'days', weekWord = 'weeks', ago = 'ago',
 		justNow = 'just now', singleHour = 'An hour', singleDay = 'A day', singleWeek = 'A week'
 
-	if (lang === 'ru') {	
+	if (lang === 'ru') {
 		const getWord = (one, few, many, number) => {
 			let word
 			if (number <= 20) {
-				if (number >= 2) {
-					word = few
-				}
-				if (number >= 5) {
-					word = many
-				}
+				if (number >= 2) word = few
+				if (number >= 5) word = many
 			} else {
-				if (number%10 === 1) {
-					word = one
-				}
-				if (number%10 > 1) {
-					word = few
-				}
-				if (number%10 > 4 || number%10 === 0) {
-					word = many
-				}
+				if (number%10 === 1) word = one
+				if (number%10 > 1) word = few
+				if (number%10 > 4 || number%10 === 0) word = many
 			}
 			return word
 		}
