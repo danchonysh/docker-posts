@@ -3,6 +3,8 @@ mongo:
 	-p 27017:27017 \
 	--name mongodb \
 	--network posts-net \
+	-v posts-data:/data/db \
+	--env-file ./config/dev.env \
 	mongo
 
 api:
@@ -10,6 +12,9 @@ api:
 	-p 3000:3000 \
 	--name posts-api \
 	--network posts-net \
+	--env-file ./config/dev.env \
+	-v /home/daniel/Learning/docker-posts/services/api:/app \
+	-v /app/node_modules \
 	posts-api
 
 ui:

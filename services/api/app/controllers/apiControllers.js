@@ -27,8 +27,9 @@ exports.getNews = async (req, res, next) => {
 			result = await newsServices.getAllNews()
 		}
 		res.status(200).json(result)
-	} catch (e) {
+	} catch(err) {
 		console.warn('Error: ', e)
+		next()
 	}
 }
 
@@ -36,8 +37,9 @@ exports.createNews = async (req, res, next) => {
 	try {
 		const result = await newsServices.createNews(req.body)
 		res.status(201).json(result)
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
@@ -45,8 +47,9 @@ exports.removeNews = async (req, res, next) => {
 	try {
 		const result = await newsServices.removeNews(req.params.id)
 		res.status(200).json(result)
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
@@ -54,8 +57,9 @@ exports.editNews = async (req, res, next) => {
 	try {
 		const result = await newsServices.editNews(req.body, req.params.id)
 		res.status(200).json(result)
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
@@ -69,8 +73,9 @@ exports.getPosts = async (req, res, next) => {
 			result = await postsServices.getAllPosts()
 		}
 		res.status(200).json(result)
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
@@ -84,14 +89,15 @@ exports.createPost = async (req, res, next) => {
 				const post = {
 					image: req.file.path,
 					caption: req.body.caption,
-					date: new Date(Date.now()).toLocaleString()
+					date: new Date().toLocaleString()
 				}
 				const result = await postsServices.createPost(post)
 				res.status(201).json(result)
 			}
  		})
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
@@ -99,14 +105,15 @@ exports.removePost = async (req, res, next) => {
 	try {
 		const result = await postsServices.removePost(req.params.id)
 		res.status(200).json(result)
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
 
 exports.editPost = async (req, res, next) => {
 	try {
-		upload(req, res, async (err) => {
+		upload(req, res, async err => {
 			if (err) {
 				res.json({ status: err })
 			}
@@ -128,7 +135,8 @@ exports.editPost = async (req, res, next) => {
 				res.status(201).json(result)
 			}
  		})
-	} catch (e) {
-		console.warn('Error: ', e)
+	} catch(err) {
+		console.warn('Error: ', err)
+		next()
 	}
 }
