@@ -1,5 +1,3 @@
-import toLocal from '../../assets/libs/toLocal'
-
 export default {
 	state: {
 		news: false,

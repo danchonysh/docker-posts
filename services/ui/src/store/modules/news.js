@@ -1,5 +1,4 @@
 import ContentClass from '../../assets/libs/ContentClass'
-const { url } = require('../urls')
 
 export default {
 	state: {
@@ -9,7 +8,7 @@ export default {
 		getNews: async ({ dispatch, commit }) => {
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `${url}news`,
+					url: '/news',
 					success: res => {
 						commit('getNews', res.data)
 						resolve()
@@ -23,7 +22,7 @@ export default {
 		addNews: async ({ dispatch, commit }, data) => {
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `${url}news`,
+					url: '/news',
 					method: 'POST',
 					data,
 					success: res => {
@@ -37,7 +36,7 @@ export default {
 		deleteNews: async ({ dispatch, commit }, id) => {
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `${url}news/${id}`,
+					url: `/news/${id}`,
 					method: 'DELETE',
 					success: res => {
 						commit('deleteNews', id)
@@ -51,7 +50,7 @@ export default {
 			const { id, body } = data
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `${url}news/${id}`,
+					url: `/news/${id}`,
 					method: 'PUT',
 					data: body,
 					success: res => {
