@@ -1,42 +1,39 @@
 version: '3.3'
 services:
-  mongo:
-    image: mongo
-    ports:
-      - 27071:27017
-    env_file:
-       - ./config/dev.env
-    volumes:
-      - posts-data:/data/db
-  api:
-    build: ./services/api
-    ports:
-      - 3000:3000
-    working_dir: /app
-    volumes:
-      - ./services/api:/app
-      - /app/node_modules
-    env_file:
-       - ./config/dev.env
-    depends_on: [ mongo ]
-  ui:
-    build: ./services/ui
-    ports:
-      - 5000:8080
-    working_dir: /app
-    env_file:
-       - ./config/dev.env
-    volumes:
-      - ./services/ui/src:/app/src
-      - /app/node_modules
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    tty: true
-    ports:
-      - 80:80
-    volumes:
-      - ./services/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
-      - ./services/ui/public:/var/www/public:ro
+	mongo:
+		image: mongo
+		ports:
+		- 27071:27017
+		env_file:
+		- ./config/dev.env
+		volumes:
+		- posts-data:/data/db
+	api:
+		build: ./services/api
+		working_dir: /app
+		volumes:
+		- ./services/api:/app
+		- /app/node_modules
+		env_file:
+		- ./config/dev.env
+		depends_on: 
+		- mongo
+	ui:
+		build: ./services/ui
+		working_dir: /app
+		env_file:
+		- ./config/dev.env
+		volumes:
+		- ./services/ui/src:/app/src
+		- /app/node_modules
+	nginx:
+		image: nginx:alpine
+		restart: unless-stopped
+		tty: true
+		ports:
+		- 80:80
+		volumes:
+		- ./services/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+		- ./services/ui/public:/var/www/public:ro
 volumes:
-  posts-data:
+	posts-data:

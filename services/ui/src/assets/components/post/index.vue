@@ -132,7 +132,7 @@ export default {
 			const prev = this.preview
 			const image = prev
 				? `url(${prev})` 
-				: `url(${BASE_URL + this.post.image})`
+				: `url(api/${this.post.image})`
 			return { backgroundImage: image }
 		},
 		time() {

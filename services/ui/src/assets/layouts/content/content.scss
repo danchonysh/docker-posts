@@ -2,11 +2,12 @@
 
 main {
 	flex: 1 0 auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .content {
-	height: 100%;
-	overflow: hidden;
+	height: 74vh;
 	margin: 30px auto;
 	&__item {
 		margin: 20px;
