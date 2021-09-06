@@ -11,7 +11,8 @@ import { BASE_URL } from '../constants'
 Vue.use(Vuex)
 
 console.log(BASE_URL)
-const api = axios.create({ baseURL: BASE_URL })
+const api = axios.create({ baseURL: BASE_URL || `http://${document.location.host}/api/`})
+console.log(`http://${document.location.host}/api/`)
 
 export default new Vuex.Store({
 	actions: {

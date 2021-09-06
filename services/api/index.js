@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/api', apiRouter)
+app.get('/api', (_, res) => {
+	res.status(200).send('POSTS_API')
+})
 
 createConnection()
 	.then(() => {
