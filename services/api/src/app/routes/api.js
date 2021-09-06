@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const apiController = require('../app/controllers/apiControllers')
+const apiController = require('../controllers/apiControllers')
 
 router.get('/news', apiController.getNews)
 router.post('/news', apiController.createNews)
