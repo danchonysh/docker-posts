@@ -24,9 +24,9 @@ export default {
 	},
 	mutations: {
 		[LOAD_NEWS]: (state, data) => state.news = data,
-		[POST_NEWS]: (state, news) => state.news.push(news),
-		[DELETE_NEWS]: (state, _id) => state.news.filter(({ _id: nid }) => nid !== _id),
-		[EDIT_NEWS]: (state, news) => state.news.map(item => item._id === news._id ? news : item)
+		[POST_NEWS]: (state, news) => state.news = [ ...state.news, news ],
+		[DELETE_NEWS]: (state, _id) => state.news = state.news.filter(({ _id: nid }) => nid !== _id),
+		[EDIT_NEWS]: (state, news) => state.news = state.news.map(item => item._id === news._id ? news : item)
 	},
 	getters: {
 		allNews: state => state.news.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))

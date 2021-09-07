@@ -34,7 +34,7 @@ newsController.removeNews = async (req, res, next) => {
 
 newsController.editNews = async (req, res, next) => {
 	try {
-		const result = await service.editNews(req.body, req.params.id)
+		const result = await service.editNews(req.params.id, req.body)
 		res.status(200).json(result)
 	} catch(err) {
 		console.warn('Error: ', err)

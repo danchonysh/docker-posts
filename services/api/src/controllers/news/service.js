@@ -18,8 +18,8 @@ exports.removeNews = async _id => {
 	return result
 }
 
-exports.editNews = async (body = {}, _id) => {
+exports.editNews = async (_id, body = {}) => {
 	if (!_id) throw Error('EDIT_NEWS_ERROR: LEAKING_ID')
-	const result = await repository.editNews(body, _id)
+	const result = await repository.editNews(_id, body)
 	return result
 }

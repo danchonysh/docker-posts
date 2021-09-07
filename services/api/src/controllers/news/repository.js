@@ -5,6 +5,7 @@ exports.getAll = async () => {
 }
 
 exports.createNews = async data => {
+	data.date = new Date()
 	const created = await News.create(data)
 	console.log(created)
 	return created
@@ -16,8 +17,8 @@ exports.removeNews = async _id => {
 	return deleted
 }
 
-exports.editNews = async (body, _id) => {
-	body.date = new Date().toLocaleString()
+exports.editNews = async (_id, body) => {
+	body.date = new Date()
 	const edited = await News.findByIdAndUpdate(_id, body, { new: true })
 	console.log(edited)
 	return edited

@@ -101,11 +101,7 @@ export default {
 		async confirmEdit() {
 			const { title, article } = this.editedArticle
 			if (title && article) {
-				await this[EDIT_NEWS]({
-					_id: this.news._id,
-					title,
-					article
-				})
+				await this[EDIT_NEWS]({ _id: this.news._id, title, article })
 				this.editing = false
 				this.$refs.time.textContent = 'just now'
 			}
