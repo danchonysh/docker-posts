@@ -35,13 +35,13 @@ export default {
 				}, { root: true })
 			})
 		},
-		deletePost: async ({ dispatch, commit }, id) => {
+		deletePost: async ({ dispatch, commit }, _id) => {
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `/posts/${id}`,
+					url: `/posts/${_id}`,
 					method: 'DELETE',
 					success: res => {
-						commit('deletePost', id)
+						commit('deletePost', _id)
 						resolve()
 					},
 					failure: err => reject(err)
@@ -49,17 +49,17 @@ export default {
 			})
 		},
 		editPost: async ({ dispatch, commit }, payload) => {
-			const { id, data } = payload
+			const { _id, data } = payload
 			return new Promise((resolve, reject) => {
 				dispatch('request', {
-					url: `/posts/${id}`,
+					url: `/posts/${_id}`,
 					method: 'PUT',
 					data,
 					headers: {
 						'Content-Type': 'multipart/form-data'
 					},
 					success: res => {
-						commit('editPost', { body: res.data, id })
+						commit('editPost', { body: res.data, _id })
 						resolve()
 					},
 					failure: err => reject(err)
@@ -74,14 +74,7 @@ export default {
 		}),
 		addPost: (state, posts) => state.posts.add(posts),
 		deletePost: (state, id) => state.posts.remove({_id: id}),
-		editPost: (state, { body, id }) => {
-			const { image, caption } = body
-			state.posts.edit({_id: id}, {
-				image,
-				caption,
-				date: state.posts.getDate()
-			})
-		}
+		editPost: (state, { body, _id }) => state.posts.edit({ _id }, body)
 	},
 	getters: {
 		allPosts: state => state.posts.newFirst,

@@ -55,7 +55,6 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
-import { BASE_URL } from '../../../constants'
 
 export default {
 	components: {
@@ -114,9 +113,7 @@ export default {
 				const data = new FormData()
 				data.append('caption', caption)
 				data.append('image', image)
-				data.append('prev', this.post.image)
-				data.append('date', new Date(Date.now()).toLocaleString())
-				await this.editPost({ data, id: this.post._id})
+				await this.editPost({ data, _id: this.post._id})
 				this.editing = false
 				this.newPost = {
 					image: null,

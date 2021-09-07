@@ -1,5 +1,3 @@
-import ContentClass from '../../assets/libs/ContentClass'
-
 export default {
 	state: {
 		news: []
@@ -54,7 +52,7 @@ export default {
 					method: 'PUT',
 					data: body,
 					success: res => {
-						commit('editNews', { body, id })
+						commit('editNews', res.data)
 						resolve()
 					},
 					failure: err => reject(err) 
@@ -63,22 +61,12 @@ export default {
 		}
 	},
 	mutations: {
-		getNews: (state, content) => state.news = new ContentClass({
-			pattern: [ 'title', 'article', '_id', 'date', '__v' ],
-			content
-		}),
-		addNews: (state, news) => state.news.add(news),
-		deleteNews: (state, id) => state.news.remove({_id: id}),
-		editNews: (state, { body, id }) => {
-			const { article, title } = body
-			state.news.edit({_id: id}, {
-				article,
-				title,
-				date: new Date(Date.now()).toLocaleString()
-			})
-		}
+		getNews: (state, data) => state.news = data,
+		addNews: (state, news) => state.news.push(news),
+		deleteNews: (state, _id) => state.news.filter(({ _id: nid }) => nid !== _id),
+		editNews: (state, news) => state.news.map(item => item._id === news._id ? news : item)
 	},
 	getters: {
-		allNews: state => state.news.newFirst
+		allNews: state => state.news.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
 	}
 }
