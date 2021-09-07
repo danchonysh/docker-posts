@@ -23,7 +23,7 @@ postController.createPost = async (req, res, next) => {
 			const post = {
 				image: req.file.path,
 				caption: req.body.caption,
-				date: new Date().toLocaleString()
+				date: new Date()
 			}
 			const result = await service.createPost(post)
 			res.status(201).json(result)
@@ -49,8 +49,8 @@ postController.editPost = async (req, res, next) => {
 		upload(req, res, async err => {
 			if (err) throw new Error('POST_CREATE_ERROR: UPLOAD_ERROR')
 			const { path: image, caption } = { ...req.file, ...req.body }
-			const data = { image, caption }
-			const result = await service.editPost(data, req.params.id)
+			const data = { image, caption, date: new Date() }
+			const result = await service.editPost(req.params.id, data)
 			res.status(202).json(result)
  		})
 	} catch(err) {

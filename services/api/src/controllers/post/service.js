@@ -18,8 +18,8 @@ exports.removePost = async _id => {
 	return result
 }
 
-exports.editPost = async (body, _id) => {
+exports.editPost = async (_id, body) => {
 	if (!_id) throw Error('EDIT_POST_ERROR: LEAKING_ID')
-	const result = await repository.editPost(body, _id)
+	const result = await repository.editPost(_id, body)
 	return result
 }

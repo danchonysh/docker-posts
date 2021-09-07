@@ -23,7 +23,7 @@ exports.removePost = async _id => {
 	return deleted
 }
 
-exports.editPost = async ({ image, caption }, _id) => {
+exports.editPost = async (_id, { image, caption, date }) => {
 	const post = await Post.findById(_id, 'image')
 	if (!post) throw new Error('DELETE_POST_ERROR: POST_NOT_EXIST')
 
@@ -34,6 +34,7 @@ exports.editPost = async ({ image, caption }, _id) => {
 		post.image = image
 	}
 	post.caption = caption
+	post.date = date
 	await post.save()
 	console.log(post)
 	return post
