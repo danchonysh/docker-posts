@@ -16,4 +16,9 @@ app.get('/api', (_, res) => {
 	res.status(200).send('POSTS_API')
 })
 
+app.use((err, req, res, _) => {
+	console.error(err.stack)
+	return res.status(502).json(err)
+})
+
 module.exports = app

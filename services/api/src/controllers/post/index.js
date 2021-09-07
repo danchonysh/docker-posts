@@ -30,7 +30,7 @@ postController.createPost = async (req, res, next) => {
  		})
 	} catch(err) {
 		console.warn('Error: ', err)
-		next()
+		next(err)
 	}
 }
 
@@ -40,7 +40,7 @@ postController.removePost = async (req, res, next) => {
 		res.status(202).json(result)
 	} catch(err) {
 		console.warn('Error: ', err)
-		next()
+		next(err)
 	}
 }
 
@@ -55,7 +55,7 @@ postController.editPost = async (req, res, next) => {
  		})
 	} catch(err) {
 		console.warn('Error: ', err)
-		next()
+		next(err)
 	}
 }
 

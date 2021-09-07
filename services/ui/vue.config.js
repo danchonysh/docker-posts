@@ -7,12 +7,12 @@ let config = {
 	productionSourceMap: false
 }
 
-if (!production) config = { 
-	...config,
-	poweredByHeader: false,
-	target: 'serverless'
-}
+// if (!production) config = { 
+// 	...config,
+// 	poweredByHeader: false,
+// 	target: 'serverless'
+// }
 
-console.log(config)
+// console.log(config)
 
 module.exports = config

@@ -13,7 +13,7 @@ services:
         working_dir: /app
         volumes:
         - ./services/api/src:/app/src
-        - ./services/api
+        - ./services/api/uploads:/app/uploads
         - /app/node_modules
         env_file:
         - ./config/dev.env
