@@ -50,6 +50,7 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
+import { DELETE_NEWS, EDIT_NEWS } from '../../../store/news/actions'
 
 export default {
 	components: {
@@ -80,7 +81,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions(['deleteNews', 'editNews']),
+		...mapActions([ DELETE_NEWS, EDIT_NEWS ]),
 		toggleButtons() {
 			this.show = !this.show
 		},
@@ -100,17 +101,17 @@ export default {
 		async confirmEdit() {
 			const { title, article } = this.editedArticle
 			if (title && article) {
-				await this.editNews({
-					id: this.news._id,
-					body: {
-						title,
-						article,
-						date: new Date(Date.now()).toLocaleString()
-					}
+				await this[EDIT_NEWS]({
+					_id: this.news._id,
+					title,
+					article
 				})
 				this.editing = false
 				this.$refs.time.textContent = 'just now'
 			}
+		},
+		async deleteNews() {
+			return await this[DELETE_NEWS](this.news._id)
 		}
 	}
 }

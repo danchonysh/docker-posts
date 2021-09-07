@@ -115,6 +115,7 @@ import Footer from './assets/layouts/footer'
 import Modal from './assets/components/modal'
 
 import { mapActions } from 'vuex'
+import { POST_NEWS } from './store/news/actions'
 
 const defaultText = 'Choose a file'
 
@@ -132,7 +133,7 @@ export default {
 		text: defaultText,
 	}),
 	methods: {
-		...mapActions(['showModal', 'hideModal', 'addNews', 'addPost']),
+		...mapActions(['showModal', 'hideModal', POST_NEWS, 'addPost']),
 		fileHandler() {
 			const image = this.$refs.file.files[0]
 			this.newPost.image = image
@@ -146,15 +147,8 @@ export default {
 			const article = this.newArticle.article.trim()
 			if (title && article) {
 				this.hideModal('news')
-				this.addNews({
-					title,
-					article,
-					date: new Date(Date.now()).toLocaleString()
-				})
-				this.newArticle = {
-					title: '',
-					article: ''
-				}
+				this[POST_NEWS]({ title, article })
+				this.newArticle = { title: '', article: '' }
 			} else {
 				this.showModal('warn')
 			}
@@ -167,10 +161,7 @@ export default {
 				formData.append('image', image)
 				formData.append('caption', caption)
 				this.addPost(formData)
-				this.newPost = {
-					caption: '',
-					image: ''
-				}
+				this.newPost = { caption: '', image: '' }
 				setTimeout(() => this.text = defaultText, 500)
 			} else {
 				this.showModal('warn')
