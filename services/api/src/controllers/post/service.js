@@ -14,7 +14,7 @@ exports.createPost = async data => {
 
 exports.removePost = async _id => {
 	if (!_id) throw Error('DELETE_POST_ERROR: LEAKING_ID')
-	const result = await repository.removePost(+_id)
+	const result = await repository.removePost(_id)
 	return result
 }
 

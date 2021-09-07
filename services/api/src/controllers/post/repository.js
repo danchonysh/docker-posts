@@ -14,7 +14,7 @@ exports.createPost = async data => {
 }
 
 exports.removePost = async _id => {
-	const deleted = await Post.findOneAndDelete(_id)
+	const deleted = await Post.findByIdAndDelete(_id)
 	fs.unlink(path.resolve(__dirname, `../../../${deleted.image}`), err => {
 		if (err) throw new Error('DELETE_POST_ERROR: DELETE_FILE_ERROR')
 	})
