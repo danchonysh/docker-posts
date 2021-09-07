@@ -60,12 +60,13 @@ import News from '../../components/news'
 import Loader from '../../components/loader'
 
 import { LOAD_NEWS } from '../../../store/news/actions'
+import { LOAD_POST } from '../../../store/posts/actions'
 
 export default {
 	components: { Tab, Post, News, Loader },
 	computed: mapGetters(['allPosts', 'allNews', 'tabs', 'display', 'changing']),
 	methods: {
-		...mapActions(['changeDisplay', 'changeTab', 'isChanging', 'showModal', LOAD_NEWS, 'getPosts', 'updateTime']),
+		...mapActions(['changeDisplay', 'changeTab', 'isChanging', 'showModal', LOAD_NEWS, LOAD_POST, 'updateTime']),
 		tabClick(idx) {
 			if (this.display !== idx) {
 				this.changeTab(idx)
@@ -81,7 +82,7 @@ export default {
 	},
 	async mounted() {
 		await this[LOAD_NEWS]()
-		await this.getPosts()
+		await this[LOAD_POST]()
 		setInterval(() => {
 			this.updateTime(Date.now())
 		}, 5000)

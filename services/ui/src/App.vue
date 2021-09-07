@@ -4,105 +4,56 @@
 		<Content />
 		<Footer />
 
-		<Modal 
-			:title="'Add Post'"
-			:type="'post'">
+		<Modal :title="'Add Post'" :type="'post'">
 			<template slot="post">
-				<form 
-					@submit.prevent
-					ref="form"
-					class="new-post" 
-					enctype="multipart/form-data">
-					<input 
-						@change="fileHandler()"
-						ref="file"
-						name="image"
-						class="new-post__photo" 
-						id="file" 
-						type="file" 
-						accept="image/*">
-					<label 
-						for="file" 
-						class="upload">
+				<form @submit.prevent ref="form" class="new-post" enctype="multipart/form-data">
+					<input @change="fileHandler()" ref="file" name="image" class="new-post__photo" id="file" type="file" accept="image/*">
+					<label for="file" class="upload">
 						{{ text }}
 					</label>
-					<textarea 
-						v-model="newPost.caption"
-						maxlength="194"
-						name="caption" 
-						class="new-post__content" 
-						type="text" 
-						placeholder="Write something">
-					</textarea>
+					<textarea v-model="newPost.caption" maxlength="194" name="caption" class="new-post__content" type="text" placeholder="Write something" />
 				</form>
 				<div class="modal__footer">
-					<button
-						class="modal__button ok"
-						@click="postHandler()">
+					<button class="modal__button ok" @click="postHandler()">
 						Add
 					</button>
-					<button 
-						class="modal__button cancel"
-						@click="hideModal('post')">
+					<button class="modal__button cancel" @click="hideModal('post')">
 						Cancel
 					</button>
 				</div>
 			</template>
 		</Modal>
 		
-		<Modal 
-			:title="'Add News'"
-			:type="'news'">
+		<Modal :title="'Add News'" :type="'news'">
 			<template slot="news">
-				<form 
-					@submit.prevent
-					class="new-aritcle">
-					<input
-						v-model="newArticle.title"
-						name="title" 
-						class="new-article__title" 
-						type="text" 
-						placeholder="Title">
-					<textarea 
-						v-model="newArticle.article"
-						name="article" 
-						class="new-article__content" 
-						type="text" 
-						placeholder="Article">
-					</textarea>
+				<form @submit.prevent class="new-aritcle">
+					<input v-model="newArticle.title" name="title" class="new-article__title" type="text" placeholder="Title">
+					<textarea v-model="newArticle.article" name="article" class="new-article__content" type="text" placeholder="Article" />
 				</form>
 				<div class="modal__footer">
-					<button
-						class="modal__button ok"
-						@click="newsHandler()">
+					<button class="modal__button ok" @click="newsHandler()">
 						Add
 					</button>
-					<button 
-						class="modal__button cancel"
-						@click="hideModal('news')">
+					<button class="modal__button cancel" @click="hideModal('news')">
 						Cancel
 					</button>
 				</div>
 			</template>
 		</Modal>
 
-		<Modal
-			title="Warning"
-			type="warn"
-			:width="300">
+		<Modal title="Warning" type="warn" :width="300">
 			<template slot="warn">
 				<p class="modal__content-warning">
 					Please, fill in the blank!
 				</p>
 				<div class="modal__footer">
-					<button 
-						class="modal__button ok"
-						@click="hideModal('warn')">
+					<button class="modal__button ok" @click="hideModal('warn')">
 						OK
 					</button>
 				</div>
 			</template>
 		</Modal>
+		
     </div>
 </template>
 
@@ -116,6 +67,7 @@ import Modal from './assets/components/modal'
 
 import { mapActions } from 'vuex'
 import { POST_NEWS } from './store/news/actions'
+import { POST_POST } from './store/posts/actions'
 
 const defaultText = 'Choose a file'
 
@@ -133,7 +85,7 @@ export default {
 		text: defaultText,
 	}),
 	methods: {
-		...mapActions(['showModal', 'hideModal', POST_NEWS, 'addPost']),
+		...mapActions(['showModal', 'hideModal', POST_NEWS, POST_POST]),
 		fileHandler() {
 			const image = this.$refs.file.files[0]
 			this.newPost.image = image
@@ -160,7 +112,7 @@ export default {
 				const formData = new FormData()
 				formData.append('image', image)
 				formData.append('caption', caption)
-				this.addPost(formData)
+				this[POST_POST](formData)
 				this.newPost = { caption: '', image: '' }
 				setTimeout(() => this.text = defaultText, 500)
 			} else {

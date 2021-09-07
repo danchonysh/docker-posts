@@ -1,48 +1,29 @@
 <template>
 	<div class="item-container" @click="show = false">
-		<Options
-			:show="show"
-			@enable-edit="enableEdit()"
-			@delete="deletePost(post._id)"
-		/>
-		<div 
-			@dblclick="editing ? $refs.upload.click() : null"
-			@click.stop
+
+		<Options :show="show" @enable-edit="enableEdit()" @delete="deletePost()" />
+
+		<div @dblclick="editing ? $refs.upload.click() : null" @click.stop :style="image"
 			:class="{
 				'post': true,
 				'moved': show
 			}"
-			:style="image">
+		>
 			<template v-if="editing">
-				<textarea @dblclick.stop
-					:style="prevHeight"
-					maxlength="194"
-					v-model="newPost.caption"
-					class="post__text input"
-					type="text">
-				</textarea>
-				<label ref="upload" for="upload"></label>
-				<input 
-					@change="getPreview()"
-					type="file" 
-					id="upload"
-					ref="file"
-					style="display: none;"
-					accept="image/*">
+				<textarea @dblclick.stop :style="prevHeight" maxlength="194" v-model="newPost.caption" class="post__text input" type="text" />
+				<label ref="upload" for="upload" />
+				<input @change="getPreview()" type="file"  id="upload" ref="file" style="display: none;" accept="image/*" />
 			</template>
-			<p v-else class="post__text" ref="content">{{post.caption}}</p>
+			<p v-else class="post__text" ref="content">{{ post.caption }}</p>
+
 			<div class="post__footer" @dblclick.stop>
-				<Confirmation 
-					v-if="editing"
-					@confirm="confirmEdit()"
-					@cancel="cancelEdit()"/>
-				<span
-					v-else-if="!oneActive"
-					class="post__options"
-					@click="toggleButtons()">
+
+				<Confirmation v-if="editing" @confirm="confirmEdit()" @cancel="cancelEdit()"/>
+
+				<span v-else-if="!oneActive" class="post__options" @click="toggleButtons()">
 					&hellip;
 				</span>
-				<p class="post__time" ref="time">{{editing ? 'editing' : time }}</p>
+				<p class="post__time" ref="time">{{ editing ? 'editing' : time }}</p>
 			</div>
 		</div>
 	</div>
@@ -55,12 +36,10 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
+import { DELETE_POST, EDIT_POST } from '../../../store/posts/actions'
 
 export default {
-	components: {
-		Confirmation,
-		Options
-	},
+	components: { Confirmation, Options },
 	props: {
 		post: {
 			Type: Object,
@@ -80,7 +59,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions(['deletePost', 'editPost', 'setActive']),
+		...mapActions([DELETE_POST, EDIT_POST, 'setActive']),
 		toggleButtons() {
 			this.show = !this.show
 		},
@@ -113,7 +92,7 @@ export default {
 				const data = new FormData()
 				data.append('caption', caption)
 				data.append('image', image)
-				await this.editPost({ data, _id: this.post._id})
+				await this[EDIT_POST]({ data, _id: this.post._id })
 				this.editing = false
 				this.newPost = {
 					image: null,
@@ -121,6 +100,9 @@ export default {
 				}
 				this.$refs.time.textContent = 'just now'
 			}
+		},
+		async deletePost() {
+			return await this[DELETE_POST](this.post._id)
 		}
 	},
 	computed: {
