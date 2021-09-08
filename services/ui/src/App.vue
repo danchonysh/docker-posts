@@ -4,54 +4,37 @@
 		<Content />
 		<Footer />
 
-		<Modal :title="'Add Post'" :type="'post'">
-			<template slot="post">
-				<form @submit.prevent ref="form" class="new-post" enctype="multipart/form-data">
-					<input @change="fileHandler()" ref="file" name="image" class="new-post__photo" id="file" type="file" accept="image/*">
-					<label for="file" class="upload">
-						{{ text }}
-					</label>
-					<textarea v-model="newPost.caption" maxlength="194" name="caption" class="new-post__content" type="text" placeholder="Write something" />
-				</form>
-				<div class="modal__footer">
-					<button class="modal__button ok" @click="postHandler()">
-						Add
-					</button>
-					<button class="modal__button cancel" @click="hideModal('post')">
-						Cancel
-					</button>
-				</div>
-			</template>
-		</Modal>
-		
-		<Modal :title="'Add News'" :type="'news'">
-			<template slot="news">
-				<form @submit.prevent class="new-aritcle">
-					<input v-model="newArticle.title" name="title" class="new-article__title" type="text" placeholder="Title">
-					<textarea v-model="newArticle.article" name="article" class="new-article__content" type="text" placeholder="Article" />
-				</form>
-				<div class="modal__footer">
-					<button class="modal__button ok" @click="newsHandler()">
-						Add
-					</button>
-					<button class="modal__button cancel" @click="hideModal('news')">
-						Cancel
-					</button>
-				</div>
-			</template>
+		<Modal :title="'Add Post'" :type="'post'"
+			:buttons="[
+				{ text: 'Add', class: 'ok', onClick: postHandler },
+				{ text: 'Cancel', class: 'cancel', onClick: hideModal }
+			]"
+		>
+			<form slot="post" @submit.prevent ref="form" class="new-post" enctype="multipart/form-data">
+				<input @change="fileHandler()" ref="file" name="image" class="new-post__photo" id="file" type="file" accept="image/*">
+				<label for="file" class="upload">
+					{{ text }}
+				</label>
+				<textarea v-model="newPost.caption" maxlength="194" name="caption" class="new-post__content" type="text" placeholder="Write something" />
+			</form>
 		</Modal>
 
-		<Modal title="Warning" type="warn" :width="300">
-			<template slot="warn">
-				<p class="modal__content-warning">
-					Please, fill in the blank!
-				</p>
-				<div class="modal__footer">
-					<button class="modal__button ok" @click="hideModal('warn')">
-						OK
-					</button>
-				</div>
-			</template>
+		<Modal :title="'Add News'" :type="'news'"
+			:buttons="[
+				{ text: 'Add', class: 'ok', onClick: newsHandler },
+				{ text: 'Cancel', class: 'cancel', onClick: hideModal }
+			]"
+		>
+			<form slot="news" @submit.prevent class="new-aritcle">
+				<input v-model="newArticle.title" name="title" class="new-article__title" type="text" placeholder="Title">
+				<textarea v-model="newArticle.article" name="article" class="new-article__content" type="text" placeholder="Article" />
+			</form>
+		</Modal>
+
+		<Modal title="Warning" type="warn" :width="300"
+			:buttons="[ { text: 'OK', class: 'ok', onClick: hideModal } ]"
+		>
+			<p slot="warn" class="modal__content-warning">Please, fill in the blank!</p>
 		</Modal>
 		
     </div>

@@ -4,12 +4,7 @@
 			<div class="btn-wrapper">
 				<nav class="tab">					
 					<ul class="tab__list">
-						<Tab
-							v-for="(tab, index) in tabsState" 
-							:key="tab.title"
-							:tab="tab"
-							@click.native="tabClick(index)"
-						/>
+						<Tab v-for="(tab, index) in tabsState" :key="tab.title" :tab="tab" @click.native="tabClick(index)" />
 					</ul>
 				</nav>
 				<button 
@@ -18,30 +13,18 @@
 					Add
 				</button>
 			</div>
-			<article 
-				:class="{
-					'tab__item' : true,
-					'change' : isAnimated
-				}">
+			<article :class="{ 'tab__item' : true, 'change' : isAnimated }">
 				<div class="posts" v-show="contentType">
 					<Loader v-if="!allPosts"/>
 					<template v-else-if="allPosts.length">
-						<Post
-							v-for="post in allPosts"
-							:key="post._id"
-							:post="post"
-						/>
+						<Post v-for="post in allPosts" :key="post._id" :post="post" />
 					</template>
 					<div v-else class="no-content">There is no posts right now...</div>	
 				</div>
 				<div class="news" v-show="!contentType">
 					<Loader v-if="!allNews"/>
 					<template v-else-if="allNews.length">
-						<News 
-							v-for="news in allNews"
-							:key="news._id"
-							:news="news"
-						/>
+						<News v-for="news in allNews" :key="news._id" :news="news" />
 					</template>
 					<div v-else class="no-content">There is no news right now...</div>
 				</div>
