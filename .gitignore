@@ -1,6 +1,9 @@
 # Uploads
 uploads/
 
+# Env
+config/*
+
 # Logs
 logs
 *.log
