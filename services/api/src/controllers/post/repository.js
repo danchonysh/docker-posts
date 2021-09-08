@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const { Post } = require('../../models')
+const Post = require('./model')
 
 exports.getAll = async () => {
 	return await Post.find({})

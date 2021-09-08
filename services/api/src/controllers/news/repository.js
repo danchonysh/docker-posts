@@ -1,4 +1,4 @@
-const { News } = require('../../models')
+const News = require('./model')
 
 exports.getAll = async () => {
 	return await News.find({})
