@@ -1,5 +1,5 @@
 const service = require('./service')
-const multer = require('../../middleware/upload')
+const multer = require('../../libs/upload')
 
 const upload = multer.single('image')
 
