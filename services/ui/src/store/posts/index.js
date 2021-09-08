@@ -1,5 +1,5 @@
 import api from '../../api'
-import { DELETE_POST, EDIT_POST, LOAD_POST, POST_POST } from './actions'
+import { DELETE_POST, EDIT_POST, LOAD_POST, POST_POST } from './strings'
 
 export default {
 	state: {

@@ -25,6 +25,7 @@
 import './modal.scss'
 
 import { mapActions, mapGetters } from 'vuex'
+import { HIDE_MODAL, SHOW_MODAL } from '../../../store/modal/strings'
 
 export default {
 	props: {
@@ -41,7 +42,15 @@ export default {
 			default: 400
 		}
 	},
-	methods: mapActions(['showModal', 'hideModal']),
+	methods: {
+		...mapActions([SHOW_MODAL, HIDE_MODAL]),
+		showModal(type) {
+			return this[SHOW_MODAL](type)
+		},
+		hideModal(type) {
+			return this[HIDE_MODAL](type)
+		}
+	},
 	computed: mapGetters(['modals']),
 	mounted() { this.$refs.modal.classList.remove('hide') }
 }

@@ -2,7 +2,7 @@
 uploads/
 
 # Env
-config/*
+config/
 
 # Logs
 logs

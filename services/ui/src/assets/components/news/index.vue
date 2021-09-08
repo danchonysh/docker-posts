@@ -50,7 +50,7 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
-import { DELETE_NEWS, EDIT_NEWS } from '../../../store/news/actions'
+import { DELETE_NEWS, EDIT_NEWS } from '../../../store/news/strings'
 
 export default {
 	components: {
@@ -75,9 +75,9 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getTime']),
+		...mapGetters(['currentTime']),
 		time() {
-			return formatting(this.news.date, this.getTime)
+			return formatting(this.news.date, this.currentTime)
 		}
 	},
 	methods: {

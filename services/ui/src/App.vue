@@ -66,8 +66,9 @@ import Footer from './assets/layouts/footer'
 import Modal from './assets/components/modal'
 
 import { mapActions } from 'vuex'
-import { POST_NEWS } from './store/news/actions'
-import { POST_POST } from './store/posts/actions'
+import { POST_NEWS } from './store/news/strings'
+import { POST_POST } from './store/posts/strings'
+import { SHOW_MODAL, HIDE_MODAL } from './store/modal/strings'
 
 const defaultText = 'Choose a file'
 
@@ -85,7 +86,7 @@ export default {
 		text: defaultText,
 	}),
 	methods: {
-		...mapActions(['showModal', 'hideModal', POST_NEWS, POST_POST]),
+		...mapActions([SHOW_MODAL, HIDE_MODAL, POST_NEWS, POST_POST]),
 		fileHandler() {
 			const image = this.$refs.file.files[0]
 			this.newPost.image = image
@@ -102,7 +103,7 @@ export default {
 				this[POST_NEWS]({ title, article })
 				this.newArticle = { title: '', article: '' }
 			} else {
-				this.showModal('warn')
+				this[SHOW_MODAL]('warn')
 			}
 		},
 		postHandler() {
@@ -116,8 +117,11 @@ export default {
 				this.newPost = { caption: '', image: '' }
 				setTimeout(() => this.text = defaultText, 500)
 			} else {
-				this.showModal('warn')
+				this[SHOW_MODAL]('warn')
 			}
+		},
+		hideModal(value) {
+			return this[HIDE_MODAL](value)
 		}
 	}
 }

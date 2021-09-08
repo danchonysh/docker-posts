@@ -1,5 +1,5 @@
 import api from '../../api'
-import { LOAD_NEWS, POST_NEWS, DELETE_NEWS, EDIT_NEWS } from './actions'
+import { LOAD_NEWS, POST_NEWS, DELETE_NEWS, EDIT_NEWS } from './strings'
 
 export default {
 	state: {

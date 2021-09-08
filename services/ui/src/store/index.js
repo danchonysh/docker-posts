@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 
 import posts from './posts'
 import news from './news'
-import pageState from './modules/page-state'
-import modal from './modules/modal'
+import pageState from './page'
+import modal from './modal'
 
 Vue.use(Vuex)
 

@@ -20,7 +20,7 @@
 
 				<Confirmation v-if="editing" @confirm="confirmEdit()" @cancel="cancelEdit()"/>
 
-				<span v-else-if="!oneActive" class="post__options" @click="toggleButtons()">
+				<span v-else-if="!activeContentItem" class="post__options" @click="toggleButtons()">
 					&hellip;
 				</span>
 				<p class="post__time" ref="time">{{ editing ? 'editing' : time }}</p>
@@ -36,7 +36,8 @@ import formatting from '../../libs/timeFormatting'
 import Confirmation from '../../UI/confirmation'
 import Options from '../../UI/options'
 import { mapActions, mapGetters } from 'vuex'
-import { DELETE_POST, EDIT_POST } from '../../../store/posts/actions'
+import { DELETE_POST, EDIT_POST } from '../../../store/posts/strings'
+import { SET_ACTIVE_CONTENT_ITEM } from '../../../store/page/strings'
 
 export default {
 	components: { Confirmation, Options },
@@ -59,7 +60,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions([DELETE_POST, EDIT_POST, 'setActive']),
+		...mapActions([DELETE_POST, EDIT_POST, SET_ACTIVE_CONTENT_ITEM]),
 		toggleButtons() {
 			this.show = !this.show
 		},
@@ -106,7 +107,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['oneActive', 'getTime']),
+		...mapGetters(['contentType', 'currentTime', 'activeContentItem']),
 		image() {
 			const prev = this.preview
 			const image = prev
@@ -115,12 +116,12 @@ export default {
 			return { backgroundImage: image }
 		},
 		time() {
-			return formatting(this.post.date, this.getTime)
+			return formatting(this.post.date, this.currentTime)
 		}
 	},
 	watch: {
 		editing() {
-			this.setActive(this.editing ? this.post._id : false)
+			this[SET_ACTIVE_CONTENT_ITEM](this.editing ? this.post._id : false)
 		}
 	}
 }
