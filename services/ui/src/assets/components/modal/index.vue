@@ -14,7 +14,7 @@
 				'open' : modals[type],
 				'close' : !modals[type]
 			}"
-			:style="{ width: `min(50%, ${width}px)`}">
+			:style="{ width: `min(80%, ${width}px)`}">
 			<h2 class="modal__header">{{ title }}</h2>
 			<slot :name="type"></slot>
 		</div>
