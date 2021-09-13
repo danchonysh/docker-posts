@@ -21,7 +21,7 @@ postController.createPost = async (req, res, next) => {
 			if (err) throw new Error('POST_CREATE_ERROR: UPLOAD_ERROR')
 			if (!req.file || !req.body) throw new Error('POST_CREATE_ERROR: LEAKING_DATA')
 			const post = {
-				image: req.file.path,
+				image: req.file.filename,
 				caption: req.body.caption,
 				date: new Date()
 			}

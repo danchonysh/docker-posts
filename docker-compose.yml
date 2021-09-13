@@ -13,7 +13,6 @@ services:
         working_dir: /app
         volumes:
             - ./services/api:/app
-            - ./services/api/uploads:/app/uploads
             - /app/node_modules
         env_file:
             - ./config/dev.env
@@ -36,6 +35,6 @@ services:
         - 80:80
         volumes:
             - ./services/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
-            - ./services/ui/public:/var/www/public:ro
+            - ./services/api/src/public:/var/www/public:ro
 volumes:
     posts-data:
