@@ -1,8 +1,9 @@
 const multer = require('multer')
+const path = require('path')
 
 const storage = multer.diskStorage({
 	destination(_, __, cb) {
-		cb(null, `public/uploads/`)
+		cb(null, path.resolve(__dirname, '../public/uploads'))
 	},
 	filename(_, file, cb) {
 		cb(null, `${Date.now()}-${file.originalname}`.split(' ').join('_'))

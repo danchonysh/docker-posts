@@ -15,7 +15,7 @@ exports.createPost = async data => {
 
 exports.removePost = async _id => {
 	const deleted = await Post.findByIdAndDelete(_id)
-	fs.unlink(path.resolve(__dirname, `../../../public/${deleted.image}`), err => {
+	fs.unlink(path.resolve(__dirname, `../../public/uploads/${deleted.image}`), err => {
 		if (err) throw new Error('DELETE_POST_ERROR: DELETE_FILE_ERROR')
 	})
 
@@ -28,7 +28,7 @@ exports.editPost = async (_id, { image, caption, date }) => {
 	if (!post) throw new Error('DELETE_POST_ERROR: POST_NOT_EXIST')
 
 	if (image) {
-		fs.unlink(path.resolve(__dirname, `../../../public/${post.image}`), err => {
+		fs.unlink(path.resolve(__dirname, `../../public/uploads/${post.image}`), err => {
 			if (err) throw new Error('DELETE_POST_ERROR: DELETE_PREV_FILE_ERROR')
 		})
 		post.image = image

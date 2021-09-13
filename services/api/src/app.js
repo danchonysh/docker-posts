@@ -5,8 +5,8 @@ const app = express()
 
 const apiRouter = require('./routes/api')
 
-app.use('/ui', express.static(path.resolve(__dirname, './public/ui')))
-// app.use(express.static('public'))
+// app.use('/ui', express.static(path.resolve(__dirname, './public/ui')))
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
