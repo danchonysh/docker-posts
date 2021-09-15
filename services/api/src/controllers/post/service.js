@@ -12,14 +12,14 @@ exports.createPost = async data => {
 	return result
 }
 
-exports.removePost = async _id => {
-	if (!_id) throw Error('DELETE_POST_ERROR: LEAKING_ID')
-	const result = await repository.removePost(_id)
+exports.removePost = async id => {
+	if (!id) throw Error('DELETE_POST_ERROR: LEAKINGid')
+	const result = await repository.removePost(id)
 	return result
 }
 
-exports.editPost = async (_id, body) => {
-	if (!_id) throw Error('EDIT_POST_ERROR: LEAKING_ID')
-	const result = await repository.editPost(_id, body)
+exports.editPost = async (id, body) => {
+	if (!id) throw Error('EDIT_POST_ERROR: LEAKINGid')
+	const result = await repository.editPost(id, body)
 	return result
 }

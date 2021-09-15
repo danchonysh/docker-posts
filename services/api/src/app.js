@@ -5,7 +5,6 @@ const app = express()
 
 const apiRouter = require('./routes/api')
 
-// app.use(express.static('public'))
 app.use('/uploads', express.static(path.resolve(__dirname, './public/uploads')))
 app.use('/ui', express.static(path.resolve(__dirname, './public/ui')))
 

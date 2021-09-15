@@ -12,14 +12,14 @@ exports.createNews = async data => {
 	return result
 }
 
-exports.removeNews = async _id => {
-	if (!_id) throw Error('DELETE_NEWS_ERROR: LEAKING_ID')
-	const result = await repository.removeNews(+_id)
+exports.removeNews = async id => {
+	if (!id) throw Error('DELETE_NEWS_ERROR: LEAKINGid')
+	const result = await repository.removeNews(+id)
 	return result
 }
 
-exports.editNews = async (_id, body = {}) => {
-	if (!_id) throw Error('EDIT_NEWS_ERROR: LEAKING_ID')
-	const result = await repository.editNews(_id, body)
+exports.editNews = async (id, body = {}) => {
+	if (!id) throw Error('EDIT_NEWS_ERROR: LEAKINGid')
+	const result = await repository.editNews(id, body)
 	return result
 }

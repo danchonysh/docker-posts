@@ -7,7 +7,7 @@ newsController.getNews = async (_, res, next) => {
 		const result = await service.getAllNews()
 		res.status(200).json(result)
 	} catch(err) {
-		console.warn('Error: ', e)
+		console.warn('Error: ', err)
 		next()
 	}
 }

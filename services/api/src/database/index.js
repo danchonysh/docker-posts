@@ -1,11 +1,12 @@
-const mongoose = require('mongoose')
-const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_HOST } = require('../constants')
-const link = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/posts?authSource=admin`
+const { Pool } = require('pg')
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB } = require('../constants')
 
-const createConnection = () =>  mongoose.connect(link, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false
+const pool = new Pool({
+	user: POSTGRES_USER,
+	password: POSTGRES_PASSWORD,
+	host: POSTGRES_HOST,
+	port: POSTGRES_PORT,
+	database: POSTGRES_DB
 })
 
-module.exports = createConnection
+module.exports = pool
